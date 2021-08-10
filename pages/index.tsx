@@ -1,20 +1,31 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import Layout from 'components/Layout'
+import Head from "next/head";
+import Layout from "components/Layout";
+import FellowshipFilters from "components/FellowshipFilters";
+import { useState } from "react";
+import NewsFeed from "components/NewsFeed";
+
+const FILTERS: string[] = ["all", "founders", "angels", "writers"];
 
 export default function Home() {
+  const [selectedFilter, setSelectedFilter] = useState("all");
+
+  const handleFilterClick = (filter: string) => {
+    setSelectedFilter(filter);
+  };
+
   return (
     <Layout>
       <Head>
-        <title>On Deck Newsfeed</title>
+        <title>News Feed</title>
       </Head>
-      <h1>Hello there!</h1>
-      <p>Your future newsfeed goes to this page. Or not, you decide 🤷</p>
-      <span>Check out these pages:</span>
-      <ul>
-        <li>Project <Link href="/projects/10">Blue Onion Labs</Link></li>
-        <li>User <Link href="/users/11">Cai Burris</Link></li>
-      </ul>
+      <h1>News Feed</h1>
+      <FellowshipFilters
+        selectedFilter={selectedFilter}
+        filters={FILTERS}
+        onClick={handleFilterClick}
+      />
+      
+      <NewsFeed selectedFilter={selectedFilter}/>
     </Layout>
-  )
+  );
 }

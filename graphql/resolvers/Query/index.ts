@@ -1,5 +1,9 @@
 import _project from './project'
 import _user from './user'
+import { newsfeed } from './newsfeed'
 
-export const project = _project
-export const user = _user
+module.exports = {
+  newsfeed,
+  project: _project,
+  user: _user,
+}
